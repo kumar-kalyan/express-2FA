@@ -29,6 +29,7 @@ const corOption = {
 
 }
 
+
 app.get("/", (req, res) => {
     res.status(200).json({ hx: "Hello World !" })
 })
