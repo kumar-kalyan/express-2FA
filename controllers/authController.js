@@ -1,5 +1,5 @@
 require('dotenv').config()
-// import mongoose and connect with database
+// import mongoose and connect with databas
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_CONNECTION_URI);
 const { Schema } = mongoose;
