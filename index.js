@@ -5,10 +5,12 @@ const app = expess()
 const cors = require('cors');
 const bodyParser = require('body-parser');
 // Import routes
-const authRoutes = require("./routes/auth")
+const userRoutes = require("./routes/UserRoute")
 // use of  bodyparser middlewhere
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+// import mongoose and connect with databas
+
 
 const corOption = {
     origin: (origin, callback) => {
@@ -33,10 +35,16 @@ const corOption = {
 app.get("/", (req, res) => {
     res.status(200).json({ hx: "Hello World !" })
 })
-// login route
-app.use('/auth', authRoutes)
+// Routes
+app.use('/auth', userRoutes)
 app.use(cors(corOption))
 const Port = process.env.PORT || 5000
+
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_CONNECTION_URI).then(() => console.log("DB Connection Successfull!"))
+    .catch((err) => {
+        console.log(err);
+    });;
 app.listen(Port, () => {
     console.log(`Listning on port ${Port}`)
 })
